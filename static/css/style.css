@@ -4,22 +4,62 @@
 
 /* Defaults */
 html, body {
-    overflow-x: hidden;
+    height: 100%;
   }
 
-body {
-    position: relative
-  }
+  body {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Kanit', sans-serif;
+}
+/* Header*/
+.navbar {
+    background-color: bisque;
+    box-shadow: 1px -1px 7px 0 #00000061;
+}
+
+a.nav-link {
+    color: navy;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Kanit', sans-serif;
+}
+
+main {
+    flex: 1 0 auto;
+    background-color: white;
+}
+
+/* Footer */
+footer {
+    flex-shrink: 0;
+    background-color: rgb(121, 119, 115);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid;
+}
+
+.copyright {
+    text-align: center;
+    color: black;
+}
 
 /* Logo */
 .logo {
-    font-family: 'Imbue', sans-serif;
+    font-family: 'Kanit', sans-serif;
     font-size: x-large;
 }
 
 .logo-hero {
-    font-family: 'Imbue', sans-serif;
+    font-family: 'Kanit', sans-serif;
     font-size: 10em;
-    color: white;
-    
+    color: white;   
+}
+
+img.logo {
+    width: 8rem;
 }
