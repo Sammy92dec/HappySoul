@@ -1,5 +1,6 @@
 {% load static %}
 
+<!-- Url created so that it can be used in "If statments"-->
 {% url 'home' as home %}
 {% url 'recepies' as about_url %}
 {% url 'about' as about_url %}
@@ -34,6 +35,7 @@
             </ul>
 
             <!-- Authentcation --> 
+
              {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == logout_url %}active{% endif %}" aria-current="page" 
