@@ -13,13 +13,11 @@
   {% with request.resolver_match.url_name as url_name %}
    <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
-
          <!-- Logo -->
          <a class="navbar-brand" href="#"><img src="{% static 'favicon/logo.png' %}" alt="Recipe Sharing" class="logo"></a>
          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
          </button>
-
          <!-- Navigation items -->
          <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto mb-2" >
@@ -37,7 +35,7 @@
             <!-- Authentcation --> 
 
              {% if user.is_authenticated %}
-                    <li class="nav-item">
+                    <li class="nav-item active form"> 
                         <a class="nav-link {% if request.path == logout_url %}active{% endif %}" aria-current="page" 
                         href="{% url 'account_logout' %}">Logout</a>
                     </li>
@@ -69,4 +67,6 @@
       </div>
    </nav>
   {% endwith %}
+  
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </header>

@@ -63,3 +63,17 @@ footer {
 img.logo {
     width: 8rem;
 }
+
+.active {
+    font-weight: 400;
+    border-bottom: 2px;
+}
+
+/* form */
+
+.form {
+    width: 100;
+    margin: 3% auto;
+    box-shadow: blue;
+    border-radius: 5px;
+}
