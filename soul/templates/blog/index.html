@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,8 +20,20 @@ At HappySoul, we believe that food is more than just sustenance; it's a form of 
 
 Join us as we explore the world of gastronomy, from comforting classics to innovative creations, all with a touch of soulful flair. Let's embark on this delicious voyage together, one recipe at a time, and savor the simple pleasure of good food and good company. Welcome to the HappySoul family, where every dish is made with love and served with a sprinkle of happiness</p>
     <!--HERE GOES YOUR MIDDLE PAGE-->
-    
+
+    <div class="image-container">
+        {% if "placeholder" in post.featured_image.url %}
+        <img class="card-img-top" src="{% static 'images/default.jpg' %}"
+          alt="placeholder image">
+        {% else %}
+        <img class="card-img-top" src=" {{ post.featured_image.url }}"
+          alt="{{ post.title }}">
+        {% endif %}
+        <div class="image-flash">
+
     <!-- Custom CSS -->
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </body>
 </html>
+
+{% endblock %}

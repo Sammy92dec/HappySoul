@@ -1,6 +1,8 @@
 """ Models """
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
+
 
 
 MEAL_TYPES = (
@@ -21,7 +23,7 @@ class Recipe(models.Model):
     description = models.TextField(max_length=500, null=False, blank=False)
     instructions = models.TextField(max_length=1000, null=False, blank=False)
     ingredients = models.TextField(max_length=1000, null=False, blank=False)
-    """image = CloudinaryField('image', default='placeholder')"""
+    image = CloudinaryField('image', default='placeholder')
     image_url = models.URLField(blank=True)
     meal_type = models.CharField(max_length=50, choices=MEAL_TYPES, default='brakfast') 
     vegan = models.BooleanField(default=False)
