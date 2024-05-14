@@ -56,11 +56,10 @@ img.logo {
     border-bottom: 2px;
 }
 
-
 /* form */
 
 .form {
-    width: 100%; 
+    width: 100px; 
     margin: 3% auto;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
     border-radius: 5px;
