@@ -39,7 +39,7 @@ class Recipe(models.Model):
 
     def __str__(self):
         return str(self.title)
-
+"""
     def save(self, *args, **kwargs):
         now = datetime.datetime.now()
         d_truncated_date = datetime.date(now.year, now.month, now.day)
@@ -49,7 +49,7 @@ class Recipe(models.Model):
             )
         super(Recipe, self).save(*args, **kwargs)
 
-    likes = models.ManyToManyField(User, related_name='recipe_likes', blank=True)
+    likes = models.ManyToManyField(User, related_name='recipe_likes', blank=True)"""
     
 class Comment(models.Model):
     """

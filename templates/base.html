@@ -1,10 +1,5 @@
 {% load static %}
 
-{% url 'home' as home %}
-{% url 'about' as about_url %}
-{% url 'account_login' as login_url %}
-{% url 'account_signup' as signup_url %}
-{% url 'account_logout' as logout_url %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,13 +10,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Styling links -->
-    {% block extra_css %}
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="{ % static 'css/style.css' % }">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
      <!-- Font Awesome CDN-->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    {% endblock %}
+    
 
     <!-- Js link -->
     {% block onload_js %}
@@ -31,16 +27,111 @@
 </head>
 
 <body>
+
     <!--Header -->
-    {% include 'include/header.html' %}
+    <!-- Url created so that it can be used in "If statments"-->
+{% url 'home' as home %}
+{% url 'recepies' as about_url %}
+{% url 'about' as about_url %}
+{% url 'account_login' as login_url %}
+{% url 'account_signup' as signup_url %}
+{% url 'account_logout' as logout_url %}
+
+
+<header class="color">
+   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+
+         <!-- Logo -->
+         <a class="navbar-brand" href="#"><img src="{% static 'favicon/logo.png' %}" alt="Recipe Sharing" class="logo"></a>
+
+         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+         </button>
+
+         <!-- Navigation items -->
+         <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2" >
+               <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="#">Recepies</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link " href="#">About Us</a>
+               </li>
+            </ul>
+
+            <!-- Authentcation --> 
+
+             {% if user.is_authenticated %}
+                    <li class="nav-item active form"> 
+                        <a class="nav-link {% if request.path == logout_url %}active{% endif %}" aria-current="page" 
+                        href="{% url 'account_logout' %}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == signup_url %}active{% endif %}" aria-current="page"
+                            href="{% url 'account_signup' %}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == login_url %}active{% endif %}" aria-current="page" 
+                        href="{% url 'account_login' %}">Login</a>
+                    </li>
+                    {% endif %}
+
+                    <div class="flex-shrink-0 main-bg">
+                        {% if user.is_authenticated %}
+                        <p class="text-end m-3">You are logged in as {{ user }}</p>
+                        {% else %}
+                        <p class="text-end m-3">You are not logged in</p>
+                        {% endif %}
+                    </div>
+
+            <!-- Search  -->
+            <form class="d-flex">
+               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+               <button class="btn btn-outline-primary" type="submit">Search</button>
+            </form>
+         </div>
+      </div>
+   </nav>
 
     <!-- Main -->
     
-    <!-- footer -->
-{% include 'include/footer.html' %}
+
+
+<!-- Footer -->
+<footer class="bg-light text-center text-white mt-auto color">
+    <div class="container p-4 pb-0">
+       <div class="mb-4">
+        
+          <!-- Facebook -->
+          <a class="btn btn-outline-dark btn-floating m-1" 
+             href="https://www.facebook.com" target="_blank" role="button"
+             ><i class="fab fa-facebook"></i>
+          </a>
+          <!-- Twitter -->
+          <a class="btn btn-outline-dark btn-floating m-1" href="https://www.twitter.com" target="_blank" role="button"
+             ><i class="fab fa-twitter"></i
+             ></a>
+          <!-- Instagram -->
+          <a class="btn btn-outline-dark btn-floating m-1" href="https://www.instagram.com" target="_blank" role="button"
+             ><i class="fab fa-instagram"></i
+             ></a>
+          <!-- Youtube -->
+          <a class="btn btn-outline-dark btn-floating m-1" href="https://www.youtube.com" target="_blank" role="button"
+             ><i class="fab fa-youtube"></i
+             ></a>
+       </div>
+       <span class="copyright">
+       © 2024 Copyright:
+       <a>Happy Soul</a>
+       </span>
+    </div>
+ </footer>
     
-<!-- CHECK-->
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
 </body>
 
 </html>
