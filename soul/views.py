@@ -1,8 +1,22 @@
-from django.shortcuts import render, get_object_or_404
-from django.views import generic
 from django.views.generic import CreateView, UpdateView 
 from .models import Recipe
+from django.views import generic
 from django.urls import reverse_lazy
+from .form import RecipeForm
+
+
+class AddRecipe(CreateView):
+    """ Add recipes """
+
+    template_name = "recipes/add_recipe.html"
+    model = Recipe
+    form_class = RecipeForm
+    success_message = 'Recipe Successfully Added'
+    success_url = '/recipes/'
+
+def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(AddRecipe).form_valid(form)
 
 
 
@@ -12,16 +26,15 @@ class PostList(generic.ListView):
     template_name = "blog/index.html"
     paginate_by = 6
 
-class AddRecipe(CreateView):
-    """ Add recipes """
-    template_name = "templates/add_recipe.html"
-    model = Recipe
-    success_message = 'Recipe Successfully Added'
-    success_url = reverse_lazy('your_recipes')
 
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
+
+
+
+
+
+
+
+    
 
 class EditRecipe(UpdateView):
     """Edits recipe"""

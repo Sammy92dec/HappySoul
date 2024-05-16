@@ -18,13 +18,13 @@ class Recipe(models.Model):
     """
     A model to create and manage recipes
     """
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="recipe_owner", null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="recipe_owner", null=True)
     title = models.CharField(max_length=200, null=False, blank=False)
     description = models.TextField(max_length=500, null=False, blank=False)
     instructions = models.TextField(max_length=1000, null=False, blank=False)
     ingredients = models.TextField(max_length=1000, null=False, blank=False)
     image = CloudinaryField('image', default='placeholder')
-    image_url = models.URLField(blank=True)
+    image_alt = models.URLField(blank=True)
     meal_type = models.CharField(max_length=50, choices=MEAL_TYPES, default='brakfast') 
     vegan = models.BooleanField(default=False)
     vegetarian = models.BooleanField(default=False)
