@@ -1,39 +1,34 @@
-from django.views.generic import CreateView, UpdateView 
-from .models import Recipe
-from django.views import generic
-from django.urls import reverse_lazy
-from .form import RecipeForm
-from django.shortcuts import render
+from .form import RecipeForm, CommentForm
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+from .models import Recipe, Comment, Like
 
 
+def recipe_list(request):
+    recipes = Recipe.objects.all()
+    return render(request, 'recipes/recipe_list.html',{'recipes':recipes})
 
-class AddRecipe(CreateView):
-    """ Add recipes """
+def recipe_detail(request, pk):
+    recipe = get_object_or_404(Recipe, pk=pk)
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.autor = request.user
+            comment.recipe = recipe
+            comment.save()
+            return redirect('recipe_detail', pk=pk)
 
-    template_name = "add_recipe.html"
-    model = Recipe
-    form_class = RecipeForm
-    success_message = 'Recipe Successfully Added'
-    success_url = 'add-recipe/'
-
-
-def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super(AddRecipe).form_valid(form)
-
-def add_recipe(request):
-    return render(request, 'add_recipe.html')
-
-# Create your views here.
-class PostList(generic.ListView):
-    queryset = Recipe.objects.filter(status=1)
-    template_name = "index.html"
-    paginate_by = 6
-
-
-class EditRecipe(UpdateView):
-    """Edits recipe"""
-    model = Recipe
-    template_name = 'add_recipe.html'
-    success_message = 'Recipe Successfully Updated'
-    success_url = reverse_lazy('your_recipes')    
+@login_required
+def recipe_create(request):
+    if request.method == 'POST':
+        form = RecipeForm(request.POST)
+        if form.is_valid():
+            recipe = form.save(commit=False)
+            recipe.author = request.user
+            recipe.save
+            return redirect('recipe_detail', pk=recipe.pk)
+    
+    else :
+        form = RecipeForm()
+    return  render(request, 'recipe/recipe_form.html',{'form': form})   

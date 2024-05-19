@@ -1,11 +1,8 @@
 {% extends "base.html" %}
 
-{% block title %}Recipes{% endblock %}
-
-
 {% block content %}
-{% load static %}
 
+{% load static %}
 
 <div class="col-8 offset-2 row">
     <h1 class="text-center p-2 d-block">All Recipes</h1>
@@ -14,14 +11,20 @@
 
 <!-- Recipe card -->
 <div class="container-fluid">
+
+
     <div class="container d-flex flex-row flex-wrap justify-content-center">
-        {% for recipe in recipes %} 
         <a href="{% url 'recipe_detail' recipe.id %}" class="recipes" aria-label="Click to view {{recipe.title}}">
             <div class="card m-3" style="width: 18rem;">
-                <img src="{{recipe.image.url}}" class="card-img-top" alt="{{recipe.image_alt}}">
+
+                <!-- Chooes to display image -->
+                <img src="{{recipe.image.alt}}" class="card-img-top" alt="{{recipe.image_alt}}">
                 <div class="card-body">
-                  <h2 class="card-title">{{recipe.title}}</h2>
-                  <p class="card-text">{{recipe.description|safe}}</p>
+                  <h2 class="text-muted">{{recipe.title}}</h2>
+                  <p class="card-text">{{recipe.description|safe}}
+                  <br>
+                  <p class="card-text text-muted h6">{{ recipe.published_on}} <i class="far fa-heart"></i>
+                    {{ recipe.number_of_likes }}</p>
                 </div>
             </div>
         </a>

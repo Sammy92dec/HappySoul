@@ -1,8 +1,7 @@
 from django import forms
 from django_summernote.widgets import SummernoteWidget
 from .models import Comment, Recipe
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
+
 
 class RecipeForm(forms.ModelForm):
     """ Recipe Form"""
@@ -30,12 +29,19 @@ class RecipeForm(forms.ModelForm):
         }
 
 
-"""
+
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('body',)
 
+    def __init__(self, *args, **kwargs):
+        super(CommentForm, self).__init__(*args, **kwargs)
+        self.fields[
+            'body'
+            ].label = ""
+
+"""
 class LoginForm(forms.Form):
     username = forms.CharField(label="Username")
     password = forms.CharField(label="Password", widget=forms.PasswordInput)
