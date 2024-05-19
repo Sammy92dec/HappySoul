@@ -1,7 +1,10 @@
 """ Models """
+import datetime
 from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
+from django.urls import reverse
+from django.utils.text import slugify
 
 
 
@@ -18,7 +21,7 @@ class Recipe(models.Model):
     """
     A model to create and manage recipes
     """
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="recipe_owner", null=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="recipe_owner", null=True)
     title = models.CharField(max_length=200, null=False, blank=False)
     description = models.TextField(max_length=500, null=False, blank=False)
     instructions = models.TextField(max_length=1000, null=False, blank=False)
@@ -39,7 +42,7 @@ class Recipe(models.Model):
 
     def __str__(self):
         return str(self.title)
-"""
+
     def save(self, *args, **kwargs):
         now = datetime.datetime.now()
         d_truncated_date = datetime.date(now.year, now.month, now.day)
@@ -49,16 +52,14 @@ class Recipe(models.Model):
             )
         super(Recipe, self).save(*args, **kwargs)
 
-    likes = models.ManyToManyField(User, related_name='recipe_likes', blank=True)"""
+    likes = models.ManyToManyField(User, related_name='recipe_likes', blank=True)
     
 class Comment(models.Model):
     """
     Model for comments
     """
-    recipe = models.ForeignKey(
-        Recipe, on_delete=models.CASCADE, related_name='comments'
-        )
-    name = models.CharField(max_length=80)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='comments')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     body = models.TextField(max_length=100, null=False, blank=False)
     created_on = models.DateTimeField(auto_now_add=True)
 
@@ -70,7 +71,8 @@ class Comment(models.Model):
 
     def get_absolute_url(self):
         """Sets absolute URL"""
-        return reverse('recipe_detail', args=[self.recipe.slug])   
-    
-   
-    
+        return reverse('recipe_detail', args=[self.recipe.slug])
+
+class Like(models.Model):
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='liked_by')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)

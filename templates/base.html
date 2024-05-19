@@ -31,8 +31,8 @@
     <!--Header -->
     <!-- Url created so that it can be used in "If statments"-->
 {% url 'home' as home %}
-{% url 'recepies' as about_url %}
-{% url 'about' as about_url %}
+{% url 'recipes' as recipes %}
+{% url 'add_recipe' as add_recipe %}
 {% url 'account_login' as login_url %}
 {% url 'account_signup' as signup_url %}
 {% url 'account_logout' as logout_url %}
@@ -52,16 +52,22 @@
          <!-- Navigation items -->
          <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto mb-2" >
+
                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                  <a class="nav-link active" aria-current="page" href="#">Home</a>
                </li>
+
+
                <li class="nav-item">
                   <a class="nav-link" href="#">Recipes</a>
                </li>
+
+
                <li class="nav-item">
-                  <a class="nav-link {% if request.path == 'add_recipe' %}active{% endif %}" href="{% url 'add_recipe' %}">New</a>
+                  <a class="nav-link" href="#">About us</a>
                </li>
             </ul>
+
 
             <!-- Authentcation --> 
 
@@ -99,8 +105,6 @@
    </nav>
 
     <!-- Main -->
-    
-
 
 <!-- Footer -->
 <footer class="bg-light text-center text-white mt-auto color">

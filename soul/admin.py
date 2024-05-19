@@ -15,7 +15,7 @@ class RecipeAdmin(admin.ModelAdmin):
         )
 
     search_fields = ['title', 'meal_type']
-    list_filter = ('status',)
+    list_filter = ('status','published_on')
     prepopulated_fields = {'slug': ('title',)}
     summernote_fields = ('content',)
 
@@ -23,6 +23,6 @@ class RecipeAdmin(admin.ModelAdmin):
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     # Admins Comment model features
-    list_display = ('name', 'body', 'recipe', 'created_on')
-    search_fields = ('name', 'email', 'body')
+    list_display = ('user', 'body', 'recipe', 'created_on')
+    search_fields = ('user', 'email', 'body')
     list_filter = ('created_on',)

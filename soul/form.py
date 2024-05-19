@@ -1,9 +1,8 @@
 from django import forms
 from django_summernote.widgets import SummernoteWidget
 from .models import Comment, Recipe
-
-""" from crispy_forms.helper import FormHelper
- from crispy_forms.layout import Submit"""
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
 
 class RecipeForm(forms.ModelForm):
     """ Recipe Form"""
