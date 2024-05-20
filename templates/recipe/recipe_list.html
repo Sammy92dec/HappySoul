@@ -1,13 +1,17 @@
 {% extends "base.html" %}
 
-{% block content %}
+{% block title %} All Recipes{% endblock %}
 
 {% load static %}
+
+{% block content %}
+
 
 <div class="col-8 offset-2 row">
     <h1 class="text-center p-2 d-block">All Recipes</h1>
 </div>
 
+{% recipe in recipes %}
 
 <!-- Recipe card -->
 <div class="container-fluid">
@@ -28,9 +32,8 @@
                 </div>
             </div>
         </a>
-        {% endfor %}
     </div>
-    {% endblock %}
+    
 </div>
 
 {% endblock %}

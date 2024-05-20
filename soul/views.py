@@ -6,7 +6,11 @@ from .models import Recipe, Comment, Like
 
 def recipe_list(request):
     recipes = Recipe.objects.all()
-    return render(request, 'recipes/recipe_list.html',{'recipes':recipes})
+    return render(request, 'recipe/recipe_list.html',{'recipes':recipes})
+
+
+def index(request):
+    return render(request, 'index.html')
 
 def recipe_detail(request, pk):
     recipe = get_object_or_404(Recipe, pk=pk)

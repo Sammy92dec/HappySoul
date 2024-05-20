@@ -30,7 +30,7 @@
 
     <!--Header -->
     <!-- Url created so that it can be used in "If statments"-->
-{% url 'home' as home %}
+{% url '' as home %}
 {% url 'recipes' as recipes %}
 {% url 'add_recipe' as add_recipe %}
 {% url 'account_login' as login_url %}
@@ -54,12 +54,12 @@
             <ul class="navbar-nav me-auto mb-2" >
 
                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">Home</a>
+                  <a class="nav-link active" aria-current="page" href="{% url 'recipe_list' %}">Home</a>
                </li>
 
 
                <li class="nav-item">
-                  <a class="nav-link" href="#">Recipes</a>
+                  <a class="nav-link" href="{% url 'recipe_list' %}">Recipes</a>
                </li>
 
 
@@ -105,6 +105,8 @@
    </nav>
 
     <!-- Main -->
+
+    {% block content %}{% endblock %}
 
 <!-- Footer -->
 <footer class="bg-light text-center text-white mt-auto color">
