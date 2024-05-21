@@ -23,6 +23,7 @@ def recipe_detail(request, pk):
             comment.save()
             return redirect('recipe_detail', pk=pk)
 
+
 @login_required
 def recipe_create(request):
     if request.method == 'POST':
@@ -36,3 +37,6 @@ def recipe_create(request):
     else :
         form = RecipeForm()
     return  render(request, 'recipe/recipe_form.html',{'form': form})
+
+def about(request):
+    return render(request, 'about.html')
