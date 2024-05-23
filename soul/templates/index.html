@@ -26,28 +26,16 @@ Join us as we explore the world of gastronomy, from comforting classics to innov
     <nav>
       <a href="{% url 'recipe_list' %}" >All Recipes</a>
       {% if user.is_authenticated %}
-        <a href="{% url 'account_logout' %}" >Logout</a>
         <a href="{% url 'recipe_create' %}" >Post a Recipe</a>
       {% else %}
         <a href="{% url 'account_login' %}" >Login</a>
         <a href="{% url 'account_signup' %}" >Sign Up</a>
         <a href="{% url 'account_logout' %}" >Logout</a>
-      {% endif %}"
+      {% endif %}
     </nav>
 
-   <div class="image-container">
-        {% if "placeholder" in post.featured_image.url %}
-        <img class="card-img-top" src="{% static 'images/default.jpg' %}"
-          alt="placeholder image">
-        {% else %}
-        <img class="card-img-top" src=" {{ post.featured_image.url }}"
-          alt="{{ post.title }}">
-        {% endif %}
-        <div class="image-flash">  
-
-    <!-- Custom CSS -->
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
 </body>
+
 </html>
 
 {% endblock %}

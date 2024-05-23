@@ -21,6 +21,7 @@ class Recipe(models.Model):
     """
     A model to create and manage recipes
     """
+    name = models.ForeignKey(User, on_delete=models.CASCADE, related_name="recipe_owner", null=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="recipe_owner", null=True)
     title = models.CharField(max_length=200, null=False, blank=False)
     description = models.TextField(max_length=500, null=False, blank=False)
@@ -41,7 +42,7 @@ class Recipe(models.Model):
         ordering = ['-published_on']
 
     def __str__(self):
-        return str(self.title)
+        return self.name
 
     def save(self, *args, **kwargs):
         now = datetime.datetime.now()
@@ -58,6 +59,7 @@ class Comment(models.Model):
     """
     Model for comments
     """
+    name = models.CharField(max_length=255)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='comments')
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     body = models.TextField(max_length=100, null=False, blank=False)
